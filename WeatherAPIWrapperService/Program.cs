@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Http.HttpResults;
 using StackExchange.Redis;
 using WeatherAPIWrapperService.Models;
 using WeatherAPIWrapperService.Services;
@@ -27,7 +26,7 @@ app.UseHttpsRedirection();
 
 app.MapGet("/weather/{city}", async (string city, WeatherService weatherService) =>
 {
-    WeatherResponse weatherResponse = await weatherService.GetWeatherResponseAsync(city);
+    WeatherResponse? weatherResponse = await weatherService.GetWeatherResponseAsync(city);
 
     return weatherResponse == null ? Results.NotFound() : Results.Ok(weatherResponse);
 });

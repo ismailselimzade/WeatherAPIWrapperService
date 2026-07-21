@@ -22,7 +22,7 @@ namespace WeatherAPIWrapperService.Services
                 weatherResponse = await _externalWeatherApiService.GetWeatherData(city);
                 if (weatherResponse != null)
                 {
-                    await _redis.SetAsync(weatherResponse, city, TimeSpan.FromHours(1));
+                    await _redis.SetAsync(city, weatherResponse, TimeSpan.FromHours(1));
                 }
             }
 

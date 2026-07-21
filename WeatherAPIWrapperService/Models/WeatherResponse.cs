@@ -2,7 +2,7 @@
 {
     public class WeatherResponse
     {
-        public string ResolvedAddress { get; set; }
-        public Day Day{ get; set; }
+        public string ResolvedAddress { get; set; } = string.Empty;
+        public Day? Day{ get; set; }
     }
 }

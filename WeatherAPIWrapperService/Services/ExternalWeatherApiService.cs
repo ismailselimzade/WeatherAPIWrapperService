@@ -14,7 +14,7 @@ namespace WeatherAPIWrapperService.Services
             this._configuration = configuration;
         }
 
-        public async Task<WeatherResponse> GetWeatherData(string city)
+        public async Task<WeatherResponse?> GetWeatherData(string city)
         {
             HttpClient client = _httpClientFactory.CreateClient();
             
@@ -22,21 +22,21 @@ namespace WeatherAPIWrapperService.Services
 
             if (!response.IsSuccessStatusCode)
             {
-                throw new Exception("Error");
+                return null; 
             }
 
             var json = await response.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
-            var apiWeatherResponse = JsonSerializer.Deserialize<ApiWeatherResponse>(json, options);
+            var apiWeatherResponse = JsonSerializer.Deserialize<ApiWeatherResponse>(json, options)!;
 
-            var weahterResponse = new WeatherResponse()
+            var weatherResponse = new WeatherResponse()
             {
-                ResolvedAddress = apiWeatherResponse.ResolvedAddress,
-                Day = apiWeatherResponse.Days[0]
+                ResolvedAddress =  apiWeatherResponse.ResolvedAddress,
+                Day = apiWeatherResponse.Days?[0]
             };
 
-            return weahterResponse;
+            return weatherResponse;
         }
     }
 }

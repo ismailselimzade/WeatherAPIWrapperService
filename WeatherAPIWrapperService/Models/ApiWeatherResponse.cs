@@ -2,7 +2,7 @@
 {
     public class ApiWeatherResponse
     {
-        public string ResolvedAddress { get; set; }
-        public List<Day> Days { get; set; }
+        public string ResolvedAddress { get; set; } = string.Empty;
+        public List<Day>? Days { get; set; }
     }
 }

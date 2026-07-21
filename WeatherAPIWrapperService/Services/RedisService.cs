@@ -25,7 +25,7 @@ namespace WeatherAPIWrapperService.Services
         
         }
 
-        public async Task SetAsync(WeatherResponse weatherResponse, string key, TimeSpan ttl)
+        public async Task SetAsync(string key, WeatherResponse weatherResponse,  TimeSpan ttl)
         {
             var db = _redis.GetDatabase();
             var value = JsonSerializer.Serialize(weatherResponse);
