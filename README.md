@@ -75,7 +75,7 @@ C#, ASP.NET Core, Redis, Visual Crossing Weather API
 2. Add your Visual Crossing API key using .NET User Secrets.  
    Visual Crossing API açarınızı .NET User Secrets vasitəsilə əlavə edin.
    
-   dotnet user-secrets set "WeatherAPI:Key" "your_api_key_here"
+   `dotnet user-secrets set "WeatherAPI:Key" "your_api_key_here"`
 
 3. Make sure Redis is running on `localhost:6379`.  
    Redis-in `localhost:6379`-da işlədiyinə əmin olun.
