@@ -25,5 +25,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.MapGet("/weather/{city}", async (string city, WeatherService weatherService) =>
+{
+    WeatherResponse weatherResponse = await weatherService.GetWeatherResponseAsync(city);
+
+    return weatherResponse == null ? Results.NotFound() : Results.Ok(weatherResponse);
+});
 
 app.Run();
