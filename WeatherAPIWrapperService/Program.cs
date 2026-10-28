@@ -7,7 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-builder.Services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect("localhost:6379"));
+var redisConnectionString = builder.Configuration["Redis:ConnectionString"]!;
+builder.Services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(redisConnectionString));
 builder.Services.AddScoped<RedisService>();
 builder.Services.AddScoped<ExternalWeatherApiService>();
 builder.Services.AddScoped<WeatherService>();
