@@ -14,6 +14,15 @@ builder.Services.AddScoped<ExternalWeatherApiService>();
 builder.Services.AddScoped<WeatherService>();
 builder.Services.AddHttpClient();
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
 
 var app = builder.Build();
 
@@ -23,6 +32,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+app.UseCors();
 app.UseHttpsRedirection();
 
 app.MapGet("/weather/{city}", async (string city, WeatherService weatherService) =>
@@ -31,5 +41,6 @@ app.MapGet("/weather/{city}", async (string city, WeatherService weatherService)
 
     return weatherResponse == null ? Results.NotFound() : Results.Ok(weatherResponse);
 });
+
 
 app.Run();
