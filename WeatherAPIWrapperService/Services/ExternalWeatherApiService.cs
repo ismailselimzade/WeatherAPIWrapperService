@@ -18,7 +18,7 @@ namespace WeatherAPIWrapperService.Services
         {
             HttpClient client = _httpClientFactory.CreateClient();
             
-            var response = await client.GetAsync($"https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/{city}?key={_configuration["WeatherAPI:Key"]}");
+            var response = await client.GetAsync($"https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/{city}?unitGroup=metric&key={_configuration["WeatherAPI:Key"]}");
 
             if (!response.IsSuccessStatusCode)
             {
